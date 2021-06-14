@@ -1,0 +1,1 @@
+g++ -o server -L /usr/local/lib/ main.cpp -lhttpserver
