@@ -35,7 +35,7 @@ class Save_resource: public httpserver::http_resource {
         redirectUrls[currentNumber] = body;
         mtx.unlock();
 
-        std::string response_text = "Упешно добавлен redirect на c " +
+        std::string response_text = "Упешно добавлен redirect c " +
             std::to_string(currentNumber) + " на " + body + "\n";
         httpserver::string_response* response = new httpserver::string_response(response_text, 200);
 
@@ -100,7 +100,9 @@ class Error_resource: public httpserver::http_resource {
 
 int main() {
     // создаем webserver
-    httpserver::webserver ws = httpserver::create_webserver(8080);
+    httpserver::webserver ws = httpserver::create_webserver(8080).
+        max_threads(8).
+        max_connections(200);
 
     // вспомогательная переменная, в которой мы будем хранить результат создания веб сервера
     bool successStatus = false;
